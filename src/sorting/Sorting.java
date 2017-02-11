@@ -81,7 +81,6 @@ public class Sorting
 		if(low < high)
 		{
 			pivotIndex = quick_sort_partition(array, low, high);
-System.out.println(pivotIndex+":"+low+":"+high);
 			quick_sort_sub(array, low, pivotIndex-1);
 			quick_sort_sub(array, pivotIndex+1, high);		
 		}
