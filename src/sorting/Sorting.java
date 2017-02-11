@@ -27,7 +27,7 @@ public class Sorting
 		System.arraycopy(tmpArray, 1, array, 0, n);
 	}
 
-	public static void shell_pass(int array[], int d, int n)
+	private static void shell_pass(int array[], int d, int n)
 	{
 		int i = 0, j = 0;
 		int temp = 0;
@@ -46,6 +46,46 @@ public class Sorting
 			}
 		}
 	}
+	
+	public static void quick_sort(int array[], int n)
+	{
+		quick_sort_sub(array,0,n-1);
+	}
+	
+	private static int quick_sort_partition(int array[], int low, int high)
+	{
+		int pivot = array[low];
+		while(low<high)
+		{
+			while(low<high && array[high]>=pivot)
+			{
+				high--;
+			}
+			if(low<high)
+				array[low++] = array[high];
+			
+			while(low<high && array[low]<=pivot)
+			{
+				low++;
+			}
+			if(low<high)
+				array[high--] = array[low];
+		}
+		array[low] = pivot;
+		return low;
+
+	}
+	private static void quick_sort_sub(int array[], int low, int high)
+	{
+		int pivotIndex = 0;
+		if(low < high)
+		{
+			pivotIndex = quick_sort_partition(array, low, high);
+System.out.println(pivotIndex+":"+low+":"+high);
+			quick_sort_sub(array, low, pivotIndex-1);
+			quick_sort_sub(array, pivotIndex+1, high);		
+		}
+	}
 
 	public static void shell_sorting(int array[], int n)
 	{
@@ -59,10 +99,11 @@ public class Sorting
 
 	public static void main(String[] args)
 	{
-		int array[] = { 12, 34, 89, 90, 89, 1, 78, 56, 2, 2, 12, 23, 34, 99, 89, 56, 67, 10, 45 };
+		int array[] = { 8,7,4,1,5,9,6,2,3,10 };
 		System.out.println("before sorting:" + Arrays.toString(array));
-		shell_sorting(array, array.length);
+		//shell_sorting(array, array.length);
 		// insert_sorting(array, array.length);
+		quick_sort(array, array.length);
 		System.out.println("after sorting:" + Arrays.toString(array));
 	}
 }
